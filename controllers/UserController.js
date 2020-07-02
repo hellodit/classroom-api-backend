@@ -4,18 +4,16 @@ const User = require('../models/user')
 
 const index = async(req, res) => { 
     try {
-        const greeting ='asdita ganteng banget'; 
-
+        const greeting ='It\'s work '; 
         res.status(200).send({
             greeting    
         });
-
     } catch (error) {
         res.status(400).send(error)
     }
 }
 
-const register = async(req, res) => { email
+const register = async(req, res) => { 
     const user = new User(req.body);
     try {
         await user.save();
