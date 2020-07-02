@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jsonwebtoken = require('jsonwebtoken');
+const Room = require('../models/Room');
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -42,6 +43,21 @@ const userSchema = new mongoose.Schema({
     {
     timestamps:true
 });
+
+userSchema.virtual('rooms',{
+    ref:'Room',
+    localField: '_id',
+    foreignField: 'teacher' 
+});
+
+userSchema.methods.toJSON = function () {
+    const user = this;
+    const userObject = user.toObject();
+    delete userObject.password;
+    delete userObject.tokens;
+    delete userObject.avatar;
+    return userObject;
+};
 
 userSchema.pre('save', async function (next){
     const user = this; 
@@ -85,15 +101,6 @@ userSchema.statics.findbyCredentials = async (email, password) => {
 
     return user
 }; 
-
-userSchema.methods.toJSON = function () {
-    const user = this;
-    const userObject = user.toObject();
-    delete userObject.password;
-    delete userObject.tokens;
-    delete userObject.avatar;
-    return userObject;
-};
 
 
 const User = mongoose.model('User', userSchema);
