@@ -1,7 +1,4 @@
-require('../database/mongoose')
-
 const User = require('../models/user')
-
 const index = async(req, res) => { 
     try {
         const greeting ='It\'s work '; 
@@ -21,9 +18,9 @@ const register = async(req, res) => {
         res.status(201).send({
             user,
             token
-        })
+        });
     } catch (error) {
-        res.status(400).send(error)
+        res.status(400).send(error);
     }
 }
 
