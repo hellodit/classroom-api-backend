@@ -10,12 +10,13 @@ const index = async(req,res) => {
 
         if (!room) {
             return res.status(400).send(); 
-        }
-       res.status(201).send(
-            room.materials
-        );
+        }        
+       res.status(201).send({
+           'status': true, 
+           'data':  room.materials 
+        });
     } catch (error) {
-        res.send(errpr).status(500)
+        res.send({'status':false, 'data' : []}).status(500)
     }
 }
 
@@ -33,7 +34,9 @@ const craete = async(req, res) => {
         await room.save();
 
         res.status(201).send({ 
-            room
+            'status' : true,
+            'message': 'Data successfuly added!',
+            'data': room
         });
 
     } catch (error) {
