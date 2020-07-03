@@ -12,6 +12,8 @@ const materialSchema = new Schema({
         required:true, 
         trim:true
     }
+},{
+    timestamps:true
 });
 
 

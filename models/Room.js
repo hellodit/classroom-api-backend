@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
 const roomSchema = new Schema({
     name: {
         type: String, 
@@ -16,9 +17,22 @@ const roomSchema = new Schema({
         type: Schema.Types.ObjectId, 
         require:true, 
         ref: 'User'
-    }
-},{
-    timestamps:true
+    },
+    materials: [{
+        title: {
+            type: String, 
+            required:true, 
+            trim:true,
+        },
+        description:{
+            type: String, 
+            required:true, 
+            trim:true
+        }},{
+            timestamps:true
+        }]
+    },{
+        timestamps:true
 });
 
 const Room = mongoose.model('Room', roomSchema);

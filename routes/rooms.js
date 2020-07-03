@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router(); 
+const router = express.Router({mergeParams:true}); 
 const roomController = require('../controllers/RoomController');
 const auth = require('../middleware/auth'); 
 
