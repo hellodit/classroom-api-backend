@@ -11,7 +11,10 @@ const index = async(req,res) => {
             return res.status(400).send(); 
         }
 
-        res.send(room);
+        res.send({
+            'status': true,
+            'data': room
+        });
     } catch (error) {
         res.send(500).send();
     }
@@ -25,7 +28,9 @@ const create = async(req,res) => {
     try {
         await room.save();
         res.status(201).send({ 
-            room
+            'status' : true,
+            'message': 'Data successfuly added!',
+            'data': room
         });
     } catch (error) {
         res.status(500).send(e)
@@ -37,11 +42,16 @@ const destroy = async(req,res) => {
         const room = await Room.findOneAndDelete({
             _id:req.params.id,
             teacher: req.user._id
-        });        
+        });
+
         if(!room){
             return res.status(400).send()
         }
-        res.send(room);
+        res.send({ 
+            'status' : true,
+            'message': 'Data successfuly deleted!',
+            'data'  : room
+        });
     } catch (error) {
         res.status(500).send(error)
     }
@@ -70,7 +80,11 @@ const edit = async(req,res) => {
             return res.status(400).send()
         };
 
-        res.send(room);
+        res.send({ 
+            'status' : true,
+            'message': 'Data successfuly edited!',
+            'data'  : room
+        });
     } catch (error) {
         res.status(400).send(error);
     }
