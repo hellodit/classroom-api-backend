@@ -1,4 +1,4 @@
-const Room = require('../models/Room'); 
+const Room = require('../models/room');
 
 const index = async(req,res) => { 
     const _id = req.params.id; 
@@ -77,8 +77,8 @@ const edit = async(req,res) => {
         await room.save(); 
 
         if (!room) {
-            return res.status(400).send()
-        };
+            return res.status(400).send();
+        }
 
         res.send({ 
             'status' : true,

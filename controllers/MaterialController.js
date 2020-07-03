@@ -1,4 +1,4 @@
-const Room = require('../models/Room'); 
+const Room = require('../models/room');
 
 const index = async(req,res) => {
     const _id = req.params.roomid;    

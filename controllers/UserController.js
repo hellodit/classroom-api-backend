@@ -1,5 +1,6 @@
-const User = require('../models/user')
-const index = async(req, res) => { 
+const User = require('../models/user');
+
+const index = async(req, res) => {
     try {
         const greeting ='It\'s work '; 
         res.status(200).send({
