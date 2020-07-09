@@ -1,4 +1,5 @@
 const Room = require('../models/room');
+const {responseData,responseDataCount } = require('../Helpers/responseHelper'); 
 
 const index = async(req,res) => { 
     const _id = req.params.id; 
@@ -11,10 +12,7 @@ const index = async(req,res) => {
             return res.status(400).send(); 
         }
 
-        res.send({
-            'status': true,
-            'data': room
-        });
+        res.send(responseData(room));
     } catch (error) {
         res.send(500).send();
     }
@@ -27,11 +25,8 @@ const create = async(req,res) => {
     });
     try {
         await room.save();
-        res.status(201).send({ 
-            'status' : true,
-            'message': 'Data successfuly added!',
-            'data': room
-        });
+        res.status(201).send(responseInfo('Data successfuly added!', room));
+
     } catch (error) {
         res.status(500).send(e)
     }
@@ -47,11 +42,8 @@ const destroy = async(req,res) => {
         if(!room){
             return res.status(400).send()
         }
-        res.send({ 
-            'status' : true,
-            'message': 'Data successfuly deleted!',
-            'data'  : room
-        });
+        res.status(200).send(responseInfo('Data successfuly added!', room));
+
     } catch (error) {
         res.status(500).send(error)
     }
@@ -80,11 +72,8 @@ const edit = async(req,res) => {
             return res.status(400).send();
         }
 
-        res.send({ 
-            'status' : true,
-            'message': 'Data successfuly edited!',
-            'data'  : room
-        });
+        res.status(201).send(responseInfo('Data successfuly added!', room));
+
     } catch (error) {
         res.status(400).send(error);
     }
