@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const {responseInfo}  = require('../Helpers/responseHelper');
 
 const index = async(req, res) => {
     try {
@@ -16,12 +17,13 @@ const register = async(req, res) => {
     try {
         await user.save();
         const token = await user.generateAuthToken();
-        res.status(201).send({
+        const data = {
             user,
             token
-        });
+        }
+        res.status(201).send(responseInfo('user created',data));
     } catch (error) {
-        res.status(400).send(error);
+        res.status(400).send(responseInfo(error));
     }
 }
 
@@ -29,23 +31,24 @@ const login = async(req, res) => {
     try {
         const user = await User.findbyCredentials(req.body.email, req.body.password); 
         const token = await user.generateAuthToken();
-
-        res.status(200).send({
-            user, 
+        const data = {
+            user,
             token
-        })
+        }
+        res.status(200).send(responseInfo('Login success',data));
+
     } catch (error) {
         console.log(error);
         
-        res.status(400).send(error);
+        res.status(400).send(responseInfo(error));
     }
 }
 
 const profile = async(req, res) => {
     try {
-        res.send(req.user);
+        res.status(200).send(responseData(req.user));
     } catch (error) {
-        res.status(400).send(error);
+        res.status(400).send(responseInfo(error));
     }
 }
 
