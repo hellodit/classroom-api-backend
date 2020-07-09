@@ -45,5 +45,7 @@ responseBadRequest = function(message, info){
 
 module.exports = {
     responseData,
-    responseDataCount
+    responseDataCount,
+    responseInfo,
+    responseBadRequest
 }
