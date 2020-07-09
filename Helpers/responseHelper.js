@@ -24,7 +24,7 @@ responseInfo = function(info, result = null){
     }else{
         return{ 
             'result': true, 
-            data,
+            'data' : result,
             info
         }    
     }
